@@ -1,0 +1,54 @@
+modelname: "musseco"
+
+dynamic_variables:
+  - name: A 
+    initial_value: 1.0 
+  - name: V 
+    initial_value: 0. 
+
+births:
+  - source: A
+    recipient: A
+    rate: β*A*(1-N/K)
+  - source: V
+    recipient: V 
+    rate: β*(1+s)*V*(1-N/K) 
+
+deaths:
+  - deme: A
+    rate: γ*A
+  - deme: V
+    rate: γ*V
+
+migrations:
+  - source: A 
+    recipient: V 
+    rate: μ * A 
+
+sample:
+  - deme: A 
+    size: 100
+    time: 100.0 
+  - deme: V 
+    size: 10
+    time: 100.0
+
+parameters:
+  - name: β
+    value: 1.5 
+  - name: γ
+    value: 1.0
+  - name: K 
+    value: 10000.0  
+  - name: s 
+    value: -0.2 
+  - name: μ
+    value: 0.03
+
+helpers: 
+  - name: N 
+    definition: A + V 
+
+time: 
+  initial: 0. 
+  final: 100. 
