@@ -13,7 +13,7 @@ using Distributions
 using StatsBase 
 using Interpolations
 
-staxis = range(95, maximum(o.t), length=20)  # o.t[ o.t .> 16 ] 
+staxis = range(4995, maximum(o.t), length=20)  # o.t[ o.t .> 16 ] 
 ouinterp1 = linear_interpolation( o.t , map(x->x[1],o.u) )
 ouinterp2 = linear_interpolation( o.t , map(x->x[2],o.u) )
 ouaxis = last( o.u, length(staxis))

@@ -51,4 +51,4 @@ helpers:
 
 time: 
   initial: 0. 
-  final: 100. 
+  final: 5000. 

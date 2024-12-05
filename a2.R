@@ -33,7 +33,7 @@ proc_trid <- function(trid)
 	    	    , .combine = c
 	) %dopar% {
 		trid = ps$trid[i] 
-		source('a2libs.R')
+		source('a2lib.R')
 
 		s = ps[ i, 1] 
 		mu = ps[i, 2 ]
