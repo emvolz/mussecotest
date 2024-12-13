@@ -67,7 +67,7 @@ proc_trid <- function(trid)
 	ssts[ demes == 'A' , 'A'] <- 1.0 
 	ssts[ demes == 'V' , 'V'] <- 1.0 
 
-	bdt <- DatedTree( tr, sts) 
+	bdt <- DatedTree( tr, sts, sampleStates = ssts) 
 
 	p = trueparms <- list(
 		beta = 1.5 
