@@ -21,7 +21,10 @@ mutselp <- function( s,mu ){
 	mu / ( 1 - (1+s)*(1+mu)+mu )
 }
 
-proc_trid <- function(trid)
+trid <- 11 
+trid <- 18 
+
+# proc_trid <- function(trid)
 {
 
 	st0 <- Sys.time() 
@@ -67,7 +70,7 @@ proc_trid <- function(trid)
 	ssts[ demes == 'A' , 'A'] <- 1.0 
 	ssts[ demes == 'V' , 'V'] <- 1.0 
 
-	bdt <- DatedTree( tr, sts) 
+	bdt <- DatedTree( tr, sts, sampleStates = ssts ) 
 
 	p = trueparms <- list(
 		beta = 1.5 
@@ -76,6 +79,8 @@ proc_trid <- function(trid)
 		, s = -.20 
 		, mu = .03 
 	)
+
+	tfgy <- M( p, t0 = 0, t1 = maxsts, x0 = c(A = 1, V = 1 ))
 
 	samplik <- function( bdt, M, p )
 	{
@@ -102,10 +107,10 @@ proc_trid <- function(trid)
 		l = phydynR::colik( tree = bdt, demographic.process.model=M , theta=p 
 			, x0 = c( A = 1., V = 1 )
 			, t0 = 0 
-			, res = 1000 
+			, res = 100 
 			, AgtY_penalty = 0 
-			# , likelihood='PL2'
-			, likelihood='QL'
+			, likelihood='PL2'
+			# , likelihood='QL'
 		)
 		sl <- samplik( bdt, M, p )
 		print( c( l, sl, l + sl )); print( Sys.time() )
@@ -122,6 +127,10 @@ proc_trid <- function(trid)
 
 	o = optim( par = theta0, fn = lfun, method = 'Nelder-Mead', control = list(trace=-6, fnscale=-1))
 	saveRDS( o, glue( 'a3-o-{trid}.rds') )
+
+	print( trdf[trid, ] )
+	print( c( o$par[1], exp( o$par[2])) )
+
 	o
 }
 
