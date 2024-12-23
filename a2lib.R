@@ -53,7 +53,7 @@ simtree <- function(trid, s, mu )
 			, t0 = 0 
 			, sampleTimes = sts 
 			, sampleStates = ssts 
-			, res = 1000
+			, res = 50
 			, finiteSizeCorrections=FALSE 
 	)
 	tr
