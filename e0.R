@@ -13,6 +13,9 @@ library( mlesky )
 library( diversitree )
 library( musseco )
 
+
+source( 'e0lib.R' )
+
 fits <- foreach( i = 1:ncol(parmmatrix), .combine = c ) %dopar% {
 
 	source( 'e0lib.R' )
@@ -39,7 +42,7 @@ fitsalf <- foreach( i = 1:ncol(parmmatrix), .combine = c ) %dopar% {
 	dtphy <- simtree( parmmatrix[,i] )
 	dtstates <- dtphy$tip.state
 	dtisv <- dtstates==0
-	dtfbalf = fitbisseco( dtphy, dtisv, Tg=1/dtpars[3], mu = dtpars[5], Net = NULL, theta0 = log(c(2,.75,1/2)), augment_likelihood=TRUE, optim_parms = list(), mlesky_parms = list(tau = NULL, tau_lower = .1, tau_upper = 1e7, ncpu = 4, model = 1 ) )
+	dtfbalf = fitbisseco( dtphy, dtisv, Tg=1/dtpars[3], mu = dtpars[5], Net = NULL, theta0 = log(c(2,.75,1/2)), augment_likelihood=FALSE, optim_parms = list(), mlesky_parms = list(tau = NULL, tau_lower = .1, tau_upper = 1e7, ncpu = 4, model = 1 ) )
 	dtfbalf$theoralpha <- dtpars[6] / dtpars[5]
 	dtfbalf$theoromega <- dtpars[1] / dtpars[2]
 	dtfbalf$thoerpa <-  pancestral_mutsel_balance1( dtpars[5],  dtpars[3] , coef(dtfbalf)['alpha'],  coef(dtfbalf)['omega'] )
