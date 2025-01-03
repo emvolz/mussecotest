@@ -13,7 +13,6 @@ library( doParallel )
 library( mlesky ) 
 
 library( musseco )
-# source( '/home/erik/git/musseco/R/musseco.R' )
 
 
 trids = 1:20 
@@ -32,7 +31,6 @@ fb
 # mu     0.03527616
 # omega  0.77193676
 # s     -0.22806324
-# [1] "Likelihood: "
 
 trdf[ trid, ]
 #             s         mu     omega
