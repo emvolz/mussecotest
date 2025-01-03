@@ -16,6 +16,9 @@ library( musseco )
 
 source( 'e1lib.R' )
 
+cl <- makeCluster( 24 )
+registerDoParallel( cl )
+
 	# zero is variant, one is ancestral 
 	# λ0 , λ1 , µ0 , µ1 , q01 , q10 
 
@@ -53,3 +56,4 @@ fitsalf <- foreach( i = 1:ncol(parmmatrix), .combine = c ) %dopar% {
 
 saveRDS( fitsalf, file = glue::glue( 'e1-fitsalf.rds' ))
 
+stopCluster(cl)
